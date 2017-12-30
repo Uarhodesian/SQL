@@ -1,0 +1,74 @@
+Find out which products have been ordered in our shop.
+use odanylitc
+SELECT PRODUCT_NAME 
+FROM ORDERS 
+
+Show all fields and all records of the CUSTOMERS table.
+SELECT *
+FROM CUSTOMERS
+
+Show the product names, amount and ordering date.
+SELECT PRODUCT_NAME, AMOUNT, DATE_ORDER
+FROM ORDERS
+
+Find out which products and when have been ordered in our shop. The results should be sorted by ordering date in ascending order.
+SELECT PRODUCT_NAME, DATE_ORDER
+FROM ORDERS
+ORDER BY DATE_ORDER
+
+Determine who has made orders in our shop. Show the ID of a customer without duplicates.
+SELECT DISTINCT ID_CUSTOMER
+FROM ORDERS
+
+Show the numbers of all customers which have ordered "Apple MacBook Air 13"
+SELECT ID_CUSTOMER
+FROM ORDERS
+WHERE PRODUCT_NAME = 'Apple MacBook Air 13'
+
+Get the information about customers and order dates from ORDERS table, who have ordered more than two units of some product in one order.
+SELECT ID_CUSTOMER, DATE_ORDER
+FROM ORDERS
+WHERE AMOUNT >= 2
+
+Show all orders (all fields of ORDERS table) for the year 2014 (use BETWEEN operator) 
+SELECT *
+FROM ORDERS
+WHERE YEAR(DATE_ORDER) = 2014
+
+SELECT *
+FROM ORDERS
+WHERE YEAR(DATE_ORDER) BETWEEN 2013 AND 2014
+
+Find first and last names of all customers from CUSTOMERS table whose last names start with «K» letter (please copy this letter from here).
+SELECT FIRSTNAME, LASTNAME
+FROM CUSTOMERS
+WHERE LASTNAME LIKE 'K%' 
+
+Show first and last names of all customers whose last names end with «à» (please copy this letter from here).
+SELECT FIRSTNAME, LASTNAME
+FROM CUSTOMERS
+WHERE LASTNAME LIKE '%à'
+
+Show first and last names of all customers whose last names contain exactly 6 letters.
+SELECT FIRSTNAME, LASTNAME
+FROM CUSTOMERS
+WHERE LASTNAME LIKE '______'
+
+Show all product names from ORDERS table, except of  'Asus PU301LA' and 'HP 255 G3' (use IN operator).
+SELECT PRODUCT_NAME
+FROM ORDERS
+WHERE PRODUCT_NAME NOT IN ('Asus PU301LA', 'HP 255 G3')
+
+Show last names of all customers whose addresses are not stored in our database.
+SELECT LASTNAME
+FROM CUSTOMERS
+WHERE ADDRESS IS NULL
+
+Show the order name, product name, amount of the product and a sum that should be paidfor the order. The calculated field should be named SUM_PAID
+SELECT ID, PRODUCT_NAME, AMOUNT, PRODUCT_PRICE*AMOUNT AS SUM_PAID
+FROM ORDERS
+
+Show all orders (all fields), that have been made before year 2015.
+SELECT *
+FROM ORDERS
+WHERE YEAR(DATE_ORDER) < 2015

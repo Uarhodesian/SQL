@@ -1,0 +1,44 @@
+Obtain the smallest and the biggest amount of products ordered for orders made in 2015. The Calculated columns should be named MIN_AMOUNT and MAX_AMOUNT respectively.
+use odanylitc
+SELECT MIN(AMOUNT) MIN_AMOUNT, MAX(AMOUNT) MAX_AMOUNT
+FROM ORDERS
+
+Calculate the average sum of purchasing in our shop.
+SELECT AVG(AMOUNT*PRODUCT_PRICE)/COUNT(*)
+FROM ORDERS
+
+Determine the count of customers who have made orders in our shop.
+SELECT COUNT(DISTINCT ID_CUSTOMER)
+FROM ORDERS
+
+List the names of products sold in our shop and their total amount
+SELECT PRODUCT_NAME, AMOUNT
+FROM ORDERS
+ORDER BY PRODUCT_NAME
+
+List the names of products sold in our shop and their total amount and the total sum as well.
+SELECT PRODUCT_NAME, AMOUNT, PRODUCT_PRICE, PRODUCT_PRICE*AMOUNT AS TOTAL_PRICE
+FROM ORDERS
+
+List the names of products along with the count of customers who have ordered them.
+SELECT PRODUCT_NAME, COUNT (DISTINCT ID_CUSTOMER) AS [QANTITY]
+FROM ORDERS
+GROUP BY PRODUCT_NAME
+
+Determine how many orders have been made for the products cheaper than 10000$
+SELECT PRODUCT_PRICE, COUNT(*)
+FROM ORDERS
+GROUP BY PRODUCT_PRICE
+HAVING PRODUCT_PRICE < 10000
+
+
+List the first and last names of the customers along with the count of their orders.
+SELECT LASTNAME, FIRSTNAME, COUNT(ORDERS.ID_CUSTOMER)
+FROM CUSTOMERS, ORDERS
+WHERE CUSTOMERS.ID = ORDERS.ID_CUSTOMER
+GROUP BY LASTNAME, FIRSTNAME
+List the first and last names of the customers and calculate the total sum of their orders.
+SELECT LASTNAME, FIRSTNAME, SUM(PRODUCT_PRICE*AMOUNT) AS [TOTAL]
+FROM CUSTOMERS, ORDERS
+WHERE CUSTOMERS.ID = ORDERS.ID_CUSTOMER
+GROUP BY LASTNAME, FIRSTNAME

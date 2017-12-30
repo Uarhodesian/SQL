@@ -1,0 +1,50 @@
+Module 4. Homework
+1. Adjust a relationship between tables ORDERS and CUSTOMERS, where the ID field from CUSTOMERS tables should be a primary key, 
+and the ID_CUSTOMER field from ORDERS table should be a foreign key field. After removing a customer, all his orders should also be removed.
+USE odanylitc
+ALTER TABLE ORDERS
+
+ADD FOREIGN KEY (ID_CUSTOMER)
+
+REFERENCES CUSTOMERS(ID)
+
+ON DELETE CASCADE
+
+2. Show the list of all products ordered along with first and last names of the customers.
+SELECT FIRSTNAME, LASTNAME, PRODUCT_NAME
+
+FROM CUSTOMERS C, ORDERS O
+WHERE C.ID = O.ID_CUSTOMER
+
+3. Show the information about customers. For each customer, show his last and first name, address and the name of product he ordered (use JOIN).
+SELECT FIRSTNAME, LASTNAME, ADDRESS, PRODUCT_NAME
+
+FROM CUSTOMERS JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.ID_CUSTOMER
+
+4. Do the same task as in task 3, but filter only those customers who has no address in our database.
+SELECT FIRSTNAME, LASTNAME, ADDRESS, PRODUCT_NAME
+
+FROM CUSTOMERS JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.ID_CUSTOMER AND CUSTOMERS.ADDRESS IS NULL
+
+5. Show first and last names of all customers from CUSTOMERS table and appropriate product names from ORDERS table, also show customers without orders 
+and orders without customers (if any).
+SELECT FIRSTNAME, LASTNAME, ADDRESS, PRODUCT_NAME
+
+FROM CUSTOMERS FULL JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.ID_CUSTOMER
+
+6. Show last names from CUSTOMERS table, who have not made any order (use JOIN).
+
+SELECT FIRSTNAME, LASTNAME, PRODUCT_NAME
+
+FROM CUSTOMERS LEFT JOIN ORDERS
+ON CUSTOMERS.ID = ORDERS.ID_CUSTOMER
+WHERE ORDERS.ID_CUSTOMER IS NULL
+7. Show product names and amount of products from ORDERS table, for those products where customer is not set.
+SELECT PRODUCT_NAME, AMOUNT
+
+FROM ORDERS LEFT JOIN CUSTOMERS
+ON CUSTOMERS.ID = ORDERS.ID_CUSTOMER
+WHERE ORDERS.ID_CUSTOMER IS NULL
