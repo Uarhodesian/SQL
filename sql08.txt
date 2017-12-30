@@ -1,0 +1,35 @@
+Make the the customer’s last name required.
+ALTER TABLE CUSTOMERS 
+ALTER COLUMN LASTNAME VARCHAR(30) NOT NULL
+
+Make the the customer’s first name required.
+ALTER TABLE CUSTOMERS 
+ALTER COLUMN FIRSTNAME VARCHAR(30) NOT NULL
+
+Make the the product name in an order required.
+ALTER TABLE ORDERS 
+ALTER COLUMN PRODUCT_NAME VARCHAR(40) NOT NULL
+
+Make the the product price in an order required.
+ALTER TABLE ORDERS 
+ALTER COLUMN PRODUCT_PRICE FLOAT NOT NULL
+
+Make the the order date required.
+ALTER TABLE ORDERS 
+ALTER COLUMN DATE_ORDER DATE NOT NULL
+
+Make the the product amount in an order required.
+ALTER TABLE ORDERS 
+ALTER COLUMN AMOUNT INT NOT NULL
+
+Set the default value 1 for the product amount in an order.
+ALTER TABLE ORDERS
+ADD DEFAULT '1' FOR AMOUNT
+
+Set the restriction for the product amount in an order, so that it had to be a positive number. Name the constraint as chk_order_amount.
+ALTER TABLE ORDERS 
+ADD CONSTRAINT chk_order_amount CHECK (AMOUNT>0)
+
+Make an index for the field that contains a custoner’s last name. Name the index as idx_customer_lastname.
+CREATE INDEX idx_customer_lastname
+ON CUSTOMERS(LASTNAME)
